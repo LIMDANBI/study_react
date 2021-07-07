@@ -2,9 +2,21 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+
+  const onSubmit = () => {
+    alert('submitted');
+  };
+
+  const onKeyUp = (e) => {
+    if (e.kㅊey === 'Enter') {
+      onSubmit();
+    }
+    console.log('key up');
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
+      {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -17,7 +29,9 @@ function App() {
         >
           Learn React
         </a>
-      </header>
+      </header> */}
+      <input onKeyUp={onKeyUp} />
+      <button onClick={onSubmit}>submit</button>
     </div>
   );
 }
