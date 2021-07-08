@@ -1,55 +1,25 @@
 import logo from './logo.svg';
 import './App.css';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 function App() {
 
-  const [text, setText] = useState('danbi');
-  const onSubmit = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const onSubmit = (e) => {
     alert('submitted');
+    // e.preventDefault();
+    // console.log(username, password);
   };
-
-  const onKeyUp = (e) => {
-    if (e.kㅊey === 'Enter') {
-      onSubmit();
-    }
-    console.log('key up');
-  }
-
-  // let text = 'danbi';
-
-  const updateText = () => {
-    // text = 'lim';
-    if(text === 'danbi')
-      setText('lim');
-    else
-    setText('danbi');
-    console.log(text);  
-  }
-
-  // console.log(text);
 
   return (
     <div className="App">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p> 
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
-      <input onKeyUp={onKeyUp} />
-      <button onClick={onSubmit}>submit</button>
-      <br/> <br/>
-      <span>{text}</span>
-      <button onClick={updateText}>Update</button>
+
+      <form onSubmit={onSubmit}>
+        <input placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} /> <br />  {/* target.value : input 안에 있는 값 */}
+        <input placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} /> <br />
+        <button type = "submit">Login</button>
+      </form>
 
     </div>
   );
