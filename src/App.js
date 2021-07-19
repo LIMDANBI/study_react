@@ -1,5 +1,6 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
+import Movie from './components/Movie';
 import { render } from '@testing-library/react';
 
 function App() {
@@ -14,12 +15,7 @@ function App() {
 
   const renderMovies = movies.map(movie => {
     return (
-      // key(mape을 사용할 때 unique한 값을 넣어 주어야 함, 데이터베이스에서 정보를 가지고 온 경우 주 key(ID))
-      // => data 추가, 생성, 삭제 시 리액트가 어떤 아이템인지 식별하는데 도움을 줌 
-      <div className="movie" key={movie.title}> 
-        <div className="movie-title">{movie.title}</div>
-        <div className="movie-year">{movie.year}</div>
-      </div>
+      <Movie movie={movie} key={movie.title}/> // component를 사용하기 때문에 component에 key를 넣어 줌
     )
   });
 
