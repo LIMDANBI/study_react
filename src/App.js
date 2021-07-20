@@ -6,25 +6,24 @@ import { render } from '@testing-library/react';
 
 function App() {
 
-  const [movies, setMovies] = useState(
-    [
-      { title: 'harry potter1', year: 2001 },
-      { title: 'harry potter2', year: 2002 },
-      { title: 'harry potter3', year: 2004 },
-      { title: 'harry potter4', year: 2005 },
-      { title: 'harry potter5', year: 2007 },
-    ]
-  );
-  const renderMovies = movies.map(movie => {
+  const [movies, setMovies] = useState([]);
+
+  const removeMovie = (id) => {
+    setMovies(movies.filter(movie => {
+      return movie.id !== id;
+    }));
+  }
+
+  const renderMovies = movies.length ? movies.map( movie => {
     return (
-      <Movie movie={movie} key={movie.title} /> // component를 사용하기 때문에 component에 key를 넣어 줌
+      <Movie movie={movie} key={movie.id} removeMovie={removeMovie} /> // component를 사용하기 때문에 component에 key를 넣어 줌
     )
-  });
+  }) : 'no movie list';
 
   const addMovie = (movie) => {
     setMovies([
       ...movies,
-      movie ]);
+      movie]);
   };
 
   return (

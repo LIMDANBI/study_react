@@ -8,16 +8,16 @@ const MovieForm = ({addMovie}) => {
         setMovieTitle(''); // 입력 후 지워 줌 
         setMovieYear('');
     } 
-    
+
     const onSubmit = (event) => {
         event.preventDefault(); // form 사용 시 submit을 했을 때 page reloading 방지
         addMovie({
+            id : Date.now(),
             title : movieTitle,
             year : movieYear,
         });
         resetForm();
     };
-
 
     return (
         <form onSubmit={onSubmit}>
