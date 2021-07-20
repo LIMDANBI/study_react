@@ -34,13 +34,17 @@ function App() {
     //   year: movieYear
     // })
     setMovies([
+      // 기존 배열(...movies (구조 분해 할당)) + 새로 추가 {}
       ...movies,
       {
         title: movieTitle,
         year: movieYear,
       }
-    ])
+    ]);
+    setMovieTitle(''); // 입력 후 지워 줌 
+    setMovieYear(''); 
   };
+
 
   return (
     <div className="App">
