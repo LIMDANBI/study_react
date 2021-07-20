@@ -1,16 +1,11 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
 import Movie from './components/Movie';
+import MovieForm from './components/MovieForm';
 import { render } from '@testing-library/react';
 
 function App() {
-  const [movieTitle, setMovieTitle] = useState('');
-  const [movieYear, setMovieYear] = useState('');
 
-  // movies가 state가 아니기 때문에 '영화추가'를 눌러도 rendering이 되지 x 
-  // useEffect(() =>{
-  //   console.log('render');
-  // })
   const [movies, setMovies] = useState(
     [
       { title: 'harry potter1', year: 2001 },
@@ -26,34 +21,16 @@ function App() {
     )
   });
 
-  const addMovie = (event) => {
-    event.preventDefault(); // form 사용 시 submit을 했을 때 page reloading 방지
-    // console.log(movieTitle, movieYear); // 출력 확인
-    // movies.push({
-    //   title: movieTitle,
-    //   year: movieYear
-    // })
+  const addMovie = (movie) => {
     setMovies([
-      // 기존 배열(...movies (구조 분해 할당)) + 새로 추가 {}
       ...movies,
-      {
-        title: movieTitle,
-        year: movieYear,
-      }
-    ]);
-    setMovieTitle(''); // 입력 후 지워 줌 
-    setMovieYear(''); 
+      movie ]);
   };
-
 
   return (
     <div className="App">
       <h1> Movie list </h1>
-      <form onSubmit={addMovie}>
-        <input type="text" value={movieTitle} placeholder="영화제목" onChange={e => setMovieTitle(e.target.value)} /> <br />
-        <input type="text" value={movieYear} placeholder="개봉년도" onChange={e => setMovieYear(e.target.value)} /> <br />
-        <button type="submit">영화추가</button>
-      </form>
+      <MovieForm addMovie={addMovie} />
       {renderMovies}
     </div>
   );
