@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import InputFiled from './InputField';
 
-const MovieForm = ({addMovie}) => {
+const MovieForm = ({ addMovie }) => {
     const [movieTitle, setMovieTitle] = useState('');
     const [movieYear, setMovieYear] = useState('');
     const [titleError, setTitleError] = useState('');
@@ -9,16 +10,16 @@ const MovieForm = ({addMovie}) => {
     const resetForm = () => {
         setMovieTitle(''); // 입력 후 지워 줌 
         setMovieYear('');
-    } 
+    }
 
     const validateForm = () => {
         resetErrors();
         let validated = true;
-        if(!movieTitle) {
+        if (!movieTitle) {
             setTitleError('영화제목을 넣어주세요');
             validated = false;
         }
-        if(!movieYear){
+        if (!movieYear) {
             setYearError('개봉년도를 넣어주세요');
             validated = false
         }
@@ -32,23 +33,38 @@ const MovieForm = ({addMovie}) => {
 
     const onSubmit = (event) => {
         event.preventDefault(); // form 사용 시 submit을 했을 때 page reloading 방지
-        if(validateForm()){
+        if (validateForm()) {
             addMovie({
-                id : Date.now(), // 임의로 timestamp를 id로 사용
-                title : movieTitle,
-                year : movieYear,
+                id: Date.now(), // 임의로 timestamp를 id로 사용
+                title: movieTitle,
+                year: movieYear,
             });
             resetErrors();
             resetForm();
         }
     };
 
+    //props로 보낼 때, 변수 또는 함수인 경우에는 중괄호를 사용해야 함 
     return (
         <form onSubmit={onSubmit}>
-            <input type="text" value={movieTitle} placeholder="영화제목" onChange={e => setMovieTitle(e.target.value)} /> <br />
-            <div style = {{color : 'red'}}>{titleError}</div>
-            <input type="number" value={movieYear} placeholder="개봉년도" onChange={e => setMovieYear(e.target.value)} /> <br />
-            <div style = {{color : 'red'}}>{yearError}</div>
+            <InputFiled
+                type="text"
+                value={movieTitle}
+                placeholder="영화제목"
+                onChange={e => setMovieTitle(e.target.value)}
+                errorMessage={titleError}
+            />
+            <InputFiled
+                type="number"
+                value={movieYear}
+                placeholder="개봉년도"
+                onChange={e => setMovieYear(e.target.value)}
+                errorMessage={yearError}
+            />
+            {/* <input type="text" value={movieTitle} placeholder="영화제목" onChange={e => setMovieTitle(e.target.value)} /> <br />
+            <div style = {{color : 'red'}}>{titleError}</div> */}
+            {/* <input type="number" value={movieYear} placeholder="개봉년도" onChange={e => setMovieYear(e.target.value)} /> <br />
+            <div style={{ color: 'red' }}>{yearError}</div> */}
             <button type="submit">영화추가</button>
         </form>
 
