@@ -3,7 +3,15 @@ import React, { useEffect, useState } from 'react';
 import Movie from './components/Movie';
 import MovieForm from './components/MovieForm';
 import Navbar from './components/Navbar';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useRouteMatch,
+  useParams
+} from "react-router-dom";
 import { render } from '@testing-library/react';
+
 
 function App() {
 
@@ -28,12 +36,35 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <Navbar />
-      <h1> Movie list </h1>
-      <MovieForm addMovie={addMovie} />
-      {renderMovies}
-    </div>
+    <Router>
+      <div className="App">
+        <Navbar />
+
+        {/* switch => 순서 중요 !!!!!!! (또는) exact 속성을 넣어주면 완전히 똑같아야지만 매치가 됨 !!! ㄴ*/}
+        <Switch>
+          {/* navbar 밑 변경 */}
+
+          {/* home */}
+          <Route path="/" exact>
+            <h1> Home </h1>
+          </Route>
+
+          {/* movies */}
+          <Route path="/movies">
+            <h1> Movie list </h1>
+            <MovieForm addMovie={addMovie} />
+            {renderMovies}
+          </Route>
+
+          {/* users */}
+          <Route path="/users">
+            <h1> Users </h1>
+          </Route>
+
+        </Switch>
+
+      </div>
+    </Router>
   );
 }
 
