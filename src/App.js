@@ -10,6 +10,7 @@ import {
   useRouteMatch,
   useParams
 } from "react-router-dom";
+import Users from "./pages/Users";
 import { render } from '@testing-library/react';
 
 
@@ -58,7 +59,7 @@ function App() {
 
           {/* users */}
           <Route path="/users">
-            <h1> Users </h1>
+            <Users />
           </Route>
 
         </Switch>
