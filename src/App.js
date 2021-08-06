@@ -41,28 +41,30 @@ function App() {
       <div className="App">
         <Navbar />
 
-        {/* switch => 순서 중요 !!!!!!! (또는) exact 속성을 넣어주면 완전히 똑같아야지만 매치가 됨 !!! ㄴ*/}
-        <Switch>
-          {/* navbar 밑 변경 */}
+        <div className="container">
+          {/* switch => 순서 중요 !!!!!!! (또는) exact 속성을 넣어주면 완전히 똑같아야지만 매치가 됨 !!! ㄴ*/}
+          <Switch>
+            {/* navbar 밑 변경 */}
 
-          {/* home */}
-          <Route path="/" exact>
-            <h1> Home </h1>
-          </Route>
+            {/* home */}
+            <Route path="/" exact>
+              <h1> Home </h1>
+            </Route>
 
-          {/* movies */}
-          <Route path="/movies">
-            <h1> Movie list </h1>
-            <MovieForm addMovie={addMovie} />
-            {renderMovies}
-          </Route>
+            {/* movies */}
+            <Route path="/movies">
+              <h1> Movie list </h1>
+              <MovieForm addMovie={addMovie} />
+              {renderMovies}
+            </Route>
 
-          {/* users */}
-          <Route path="/users">
-            <Users />
-          </Route>
+            {/* users */}
+            <Route path="/users">
+              <Users />
+            </Route>
 
-        </Switch>
+          </Switch>
+        </div>
 
       </div>
     </Router>
