@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 const UserList = ({ users }) => {
     return (
@@ -7,7 +8,8 @@ const UserList = ({ users }) => {
                 return (
                     <div className="card mb-2" key={user.id}>
                         <div className="card-body p-3">
-                            {user.name}
+                            {/* ``으로 감싸주면 안에서 변수 사용 가능  */}
+                            <Link to={`/users/${user.id}`}> {user.name} </Link>
                         </div>
                     </div>
                 );
