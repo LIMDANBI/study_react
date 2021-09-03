@@ -1,7 +1,5 @@
 import './App.css';
-import React, { useEffect, useState } from 'react';
-import Movie from './components/Movie';
-import MovieForm from './components/MovieForm';
+import React from 'react';
 import Navbar from './components/Navbar';
 import {
   BrowserRouter as Router,
@@ -11,30 +9,12 @@ import {
   useParams
 } from "react-router-dom";
 import Users from "./pages/Users";
+import Home from "./pages/Home";
+import Movies from "./pages/Movies";
 import { render } from '@testing-library/react';
 
 
 function App() {
-
-  const [movies, setMovies] = useState([]);
-
-  const removeMovie = (id) => {
-    setMovies(movies.filter(movie => {
-      return movie.id !== id;
-    }));
-  }
-
-  const renderMovies = movies.length ? movies.map(movie => {
-    return (
-      <Movie movie={movie} key={movie.id} removeMovie={removeMovie} /> // component를 사용하기 때문에 component에 key를 넣어 줌
-    )
-  }) : 'no movie list';
-
-  const addMovie = (movie) => {
-    setMovies([
-      ...movies,
-      movie]);
-  };
 
   return (
     <Router>
@@ -48,14 +28,12 @@ function App() {
 
             {/* home */}
             <Route path="/" exact>
-              <h1> Home </h1>
+              <Home />
             </Route>
 
             {/* movies */}
             <Route path="/movies">
-              <h1> Movie list </h1>
-              <MovieForm addMovie={addMovie} />
-              {renderMovies}
+              <Movies />
             </Route>
 
             {/* users */}
